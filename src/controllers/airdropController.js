@@ -72,8 +72,9 @@ const claimAirdrop = async (req, res) => {
         );
 
         // Get the latest blockhash
-        const { blockhash } = await connection.getLatestBlockhash();
+        const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
         transaction.recentBlockhash = blockhash;
+        transaction.lastValidBlockHeight =  lastValidBlockHeight + 300;
         transaction.feePayer = userWallet; 
 
         // Sign partial transaction
